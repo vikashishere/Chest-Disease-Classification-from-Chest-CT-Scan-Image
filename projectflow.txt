@@ -4,3 +4,7 @@
     * conda create -n chest python=3.8 -y
     * conda activate chest
     * pip install -r requirements.txt
+4. In this project we will write code our logging within the src.cnnClassifier.__init__.py file
+5. Test your logging setup on demo.py file
+6. Now add the src.cnnClassifier.utils.common.py file
+7. Hands on with Ensure and Configbox module on research.trials.ipynb file

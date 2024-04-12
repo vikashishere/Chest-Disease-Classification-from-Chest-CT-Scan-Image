@@ -9,6 +9,8 @@ notebook
 numpy
 matplotlib
 seaborn
+
+#It has ability to implement exception methods
 python-box==6.0.2
 pyYAML
 tqdm
