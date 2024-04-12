@@ -1,2 +1,6 @@
 1. Create a new github public repo and clone it in local.
 2. Create your template.py file and run it.
+3. Setup your conda venv:
+    * conda create -n chest python=3.8 -y
+    * conda activate chest
+    * pip install -r requirements.txt
