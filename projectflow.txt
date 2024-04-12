@@ -1,0 +1,2 @@
+1. Create a new github public repo and clone it in local.
+2. Create your template.py file and run it.
