@@ -8,3 +8,43 @@
 5. Test your logging setup on demo.py file
 6. Now add the src.cnnClassifier.utils.common.py file
 7. Hands on with Ensure and Configbox module on research.trials.ipynb file
+8. Inside "research" dir, create one "mlflow_demo.py" and "argv-demo.py" file for exp purpose.
+9. Steps to execute mlflow_demo.py:
+    * Create an account on Dagshub, connect it to your Github
+    * On Dagshub dashboard top right corner > create > new repository > connect a repo
+      > Github connect > Add/revoke access to repo > Browse Github and select the repo
+      > Connect repository > Remote > Experiments > Copy all commands below "Using MLFlow tracking"
+    * Now you need to set 3 env variables using bash or powershell terminal (bash recommended)
+    * For bash terminal:
+        export MLFLOW_TRACKING_URI=https://dagshub.com/vikashdasXXX/MLflow-XXXXXX-Demo.mlflow
+        export MLFLOW_TRACKING_USERNAME=vikashdasXXX
+        export MLFLOW_TRACKING_PASSWORD=f4f3992ed3aXXXXXXXX4b3983126b4b9
+    * For powershell terminal:
+        $env:MLFLOW_TRACKING_URI = "https://dagshub.com/vikashdasXXX/MLflow-XXXXXX-Demo.mlflow"
+        $env:MLFLOW_TRACKING_USERNAME = "vikashdasxxx"
+        $env:MLFLOW_TRACKING_PASSWORD = "f4f3992ed3aXXXXXXXX4b3983126b4b9"
+    * Now change the remote_server_uri var from mlflow_demo.py file
+    * Run from bash terminal: "python mlflow_demo.py" (make sure venv is active on bash as well)
+    * After excecution is completed, go back to Dagshub screen > Remote > Go to mlflow UI > Table
+      and you will be able to see all the experiments performed so far (eg 5 exp if you executed
+      the mlflow_demo.py file 5times)
+    * You can also run the mlflow_demo.py file as "python mlflow_demo.py 0.2 0.2" (0.5 will 
+      be taken by the sys if no arguments given manually)
+10. Now we start with the Data Ingestion component:
+    * Upload the zipped data first on your gdrive
+    * Try downloading the data once from trails.ipynb file.
+11. Work on data ingestion notebook for experimenting. 
+    (config, constant, common.py, params.yaml[dummy value] should be ready and add "artifacts/*" to .gitignore)
+12. Work on first component "Data Ingestion" as per workflow mentioned below.
+
+
+
+## Workflows
+* Update config.yaml
+* Update params.yaml
+* Update the entity
+* Update the configuration manager in src config
+* Update the components
+* Update the pipeline
+* Update the main.py
+* Update the dvc.yaml
