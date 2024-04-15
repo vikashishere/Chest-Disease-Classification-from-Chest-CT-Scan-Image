@@ -37,6 +37,9 @@
     (config.yaml, constant, common.py, params.yaml[dummy value] should be ready and add "artifacts/*" to .gitignore)
 12. Work on first component "Data Ingestion" as per workflow mentioned below.
 13. Work on notebook - "02_prepare_base_model.ipynb" file.
+14. Add the "prepare_base_model" component as per the workflows.
+15. Work on notebook - "03_model_trainer.ipynb" file.
+16. Add the "model_trainer" component as per the workflows.
 
 
 
