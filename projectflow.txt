@@ -46,8 +46,19 @@
     * Execute as per notebook code flow.
 18. Add the "model_evaluation" component as per the workflows and choose params 
     by doing experiments with the help of mlflow.
-
-
+19. Setting up the dvc.yaml file then run pipeline using it.
+    * dvc init (this will create 2 dir: .dvc and .dvcignore)
+    * dvc repro (this will create 2 dir: dvc.lock and scores.json)
+    *Observation*: Initially when I tried "dvc repro", it gave me an error as it was 
+    looking for a file that already exists inside .dvc/cache, upon investigating I realised 
+    that my root dir name was really long so I renamed it with a shorter name. Then I deleted .dvc
+    and .dvcignore dir to perform "dvc init" again. I also had to re-activate my venv and did
+    "pip install -r requirements.txt" again. Previous error was gone but again got an unexpected
+    error during execution of 3rd stage, I could'nt figure out the reason so I just re-ran the 
+    pipeline by "dvc repro" and it helped.
+20. Moving to "Prediction" pipeline:
+    * First create one "model" dir inside root and paste final model inside.
+    * Setup the "prediction.py" file insdie cnnClassifier.pipeline
 
 
 ## Workflows

@@ -17,7 +17,8 @@ class EvaluationPipeline:
         evaluation = Evaluation(eval_config)
         evaluation.evaluation()
         evaluation.save_score()
-        evaluation.log_into_mlflow()
+        # Uncomment below if you want to log evaluation info using mlflow
+        # evaluation.log_into_mlflow()
 
 
 
