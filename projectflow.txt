@@ -40,6 +40,13 @@
 14. Add the "prepare_base_model" component as per the workflows.
 15. Work on notebook - "03_model_trainer.ipynb" file.
 16. Add the "model_trainer" component as per the workflows.
+17. Work on notebook - "04_model_evaluation_with_mlflow.ipynb" file:
+    * First, connect your igthub repo with Dagshub (as done earlier)
+    * Set env var on bash terminal(shown above) and via notebook as well.
+    * Execute as per notebook code flow.
+18. Add the "model_evaluation" component as per the workflows and choose params 
+    by doing experiments with the help of mlflow.
+
 
 
 
