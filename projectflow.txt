@@ -59,6 +59,14 @@
 20. Moving to "Prediction" pipeline:
     * First create one "model" dir inside root and paste final model inside.
     * Setup the "prediction.py" file insdie cnnClassifier.pipeline
+21. Create "templates" dir and add html file inside, also work on app.py
+22. For Containerization, create files: Dockerfile, docker-compose.yml, .dockerignore
+23. CICD:
+    * Create new dir: ".jenkins"
+    * Inside .jenkins, create a file named "Jenkinsfile"
+    * Commit and push the code once "Jenkinsfile" is ready.
+
+
 
 
 ## Workflows
