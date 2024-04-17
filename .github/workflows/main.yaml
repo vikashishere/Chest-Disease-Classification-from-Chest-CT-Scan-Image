@@ -1,8 +1,12 @@
 name: Trigger Jenkins Job
 
+# If we want to manually trigger CICD
 on:
   workflow_dispatch:
-    
+# If we want to manually trigger CICD
+# on:
+#   push:
+#       branches: [main]
 jobs:
   trigger:
     name: Build
