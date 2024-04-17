@@ -122,6 +122,7 @@
       > actions > Trigger Jenkins Job (on left hand) > run workflow > run workflow
     * Go to jenkins dashboard now to see the CICD pipeline running. Once CICD is complete, move to next step.
     * Add 8080 port to chest-machine instance (the way we did earlier) and see deployment at publicip:8080
+26. Finally delete all your AWS resources created for this project (EC2*2, IAM, ECR, Elastic IP)
 
 ## Workflows
 * Update config.yaml
