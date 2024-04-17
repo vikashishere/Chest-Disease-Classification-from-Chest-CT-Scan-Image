@@ -65,9 +65,61 @@
     * Create new dir: ".jenkins"
     * Inside .jenkins, create a file named "Jenkinsfile"
     * Commit and push the code once "Jenkinsfile" is ready.
-
-
-
+    * Go to Github repo, open "docker-compose.yml" file and click on 'raw' > copy the url.
+    * Now come back to Jenkinsfile and paste the url within 'Continuous Deployment' stage.
+24. Scripts dir added with all the scripts required for running jenkins inside aws server
+    and to setup AWS instance.
+25. Next we will work on the master-slave architechture of Jenkins. Basically we will create 
+    2 AWS instances. One will do the CI and containerization thing and push it to ECR, another
+    will pull image from ECR and do the CD (continuous deployment) part.
+    * Login to AWS console and create one IAM user > name: "chest-user" > Attach Policy Directly
+      > AdministratorAccess > next > Create User > Go to user > Security Credentials > Access Key
+      > Create Access Key > CLI > select condition box > next > Create Access Key > Download csv file
+    * Creating one EC2 instance for Jenkins: Launch instance > name: "jenkins-machine" > AMI: Ubuntu
+      > Ubuntu Server 20.04 LTS > t2.medium (4GB RAM) > create new key-pair > name: "jenkins-key"
+      > RSA > .pem > create key pair > save > allow http/https traffic > config storage: 30GB > launch
+      > go to instance id > connect > Connect using EC2 Instance Connect > Connect
+    * Now we need to setup jenkins on this ec2 instance: open the scripts.jenkins.sh file
+    * Setting up an Elastic IP: go to Elastic IP Addresses > Allocate Elastic IP Address 
+      > keeping setting as default, click on allocate > Associate this Elastic IP Address > select your ec2
+      > click Associate
+    * By default Jenkins will run on port 8080 that we need to add to our ec2 instance:
+      > go to ec2 > Security > go to security groups > inbound rules > edit inbound rules > add rule
+      > custom tcp > 8080 > 0.0.0.0/0 > save rules
+    * Now copy the public ip address of the ec2 instance and paste it in address bar followed by :8080
+      > now refer back to jenkins.sh for administrator password
+    * We will also need an ECR repo: Go to ECR > Get started > private > name: chest > Create Repo
+      > Copy the ECR URI and keep it.
+    * Now we need to set the secret variables on Jenkinsfile:
+      > On Jenkins dashboard, go to "manage jenkins" > Security > Credentials > click on 'system'
+      > click on 'global credentials' > Add Credentials > Kind: Secret Text > ID: ECR_REPOSITORY
+      > Secret: previously copied ECR URI > Create > Similarly click 'Add Credentials' and add it for
+      AWS_ACCOUNT_ID, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+      > Similar way we also need to setup the ssh key but with few changes: Kind: SSH Username with private key
+      > scope: global > id: ssh_key > private key: enter directly > add > copy paste the value from jenkins-key.pem
+      > create > (Now we need to setup a plugin for the ssh key) > go to jenkins dashboard > manage jenkins
+      > plugins > available plugins > search for 'ssh' > select 'ssh agent' > install > scroll to the bottom
+      > select: Restart Jenkins when installation is complete and no jobs are running
+      > login back to jenkins using credentials
+    * Now we need to create a pipeline on Jenkins so that we can perform CICD:
+      > Jenkins dashboard > new item > name: chest-project > select pipeline > ok > scroll to bottom 
+      > definition: Pipeline Script from SCM > SCM: git > Repo URL: https url of repo from git 
+      > Branch specifier: main/master > Script path: .jenkins/Jenkinsfile > Save
+    * Now we will create our next ec2 instance for CD:
+      ec2 > launch instance > name: chest-machine > AMI: Ubuntu > ubuntu server 20.04 LTS > t2.large (8GB)
+      > key pair login: select jenkin-key that we created earlier > allow http/https traffic > storage: 32GB
+      > launch instance > go inside instance once created > connect > Connect using EC2 Instance Connect > connect
+      > once you get into the instance terminal, refer to scripts.ec2_setup.sh
+    * Now everytime we push our code to Github, it should trigger the CICD pipeline via jenkins therefore we need
+      a workflow hence .github\workflows\main.yaml file added and the secrets needs to be added to Github:
+      Go to github project > settings > security > secret and variables > action > New Repo Secret > Name: URL
+      > Secret: (url of jenkins dashboard page[eg http://34.228.104.93:8080/]) > Add Secret
+      > New Repo Secret > Name: USER > Secret: vikashdas770 > Add Secret
+      > New Repo Secret > Name: TOKEN > Secret: (go to jenkins dashboard > people > select your userid > configure
+      > add new token > generate > copy the token > paste) > Add Secret
+      > New Repo Secret > Name: JOBS > Secret: chest-project (check on jenkins dashboard) > Add Secret
+    * Now push the code from local to git. Go to github coz we need to manually trigger the workflow:
+      > actions > Trigger Jenkins Job (on left hand) > run workflow > run workflow
 
 ## Workflows
 * Update config.yaml
