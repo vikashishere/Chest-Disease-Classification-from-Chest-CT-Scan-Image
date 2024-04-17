@@ -120,6 +120,8 @@
       > New Repo Secret > Name: JOBS > Secret: chest-project (check on jenkins dashboard) > Add Secret
     * Now push the code from local to git. Go to github coz we need to manually trigger the workflow:
       > actions > Trigger Jenkins Job (on left hand) > run workflow > run workflow
+    * Go to jenkins dashboard now to see the CICD pipeline running. Once CICD is complete, move to next step.
+    * Add 8080 port to chest-machine instance (the way we did earlier) and see deployment at publicip:8080
 
 ## Workflows
 * Update config.yaml
